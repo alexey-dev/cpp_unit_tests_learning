@@ -8,13 +8,21 @@
 
 #include "SchoolEntities.hpp"
 
-cSchool::cSchool(std::shared_ptr<IPaySchoolLogic> _payLogic) :
-    mPayLogic(_payLogic)
+cSchool::cSchool(std::shared_ptr<IPaySchoolLogic> _payLogic, std::shared_ptr<ILogger> _logger) :
+    mPayLogic(_payLogic),
+    mLogger(_logger)
 {}
     
 bool
 cSchool::AcceptNewPupil(std::shared_ptr<IPupil> _pupil)
 {
+    if (nullptr == mLogger)
+    {
+        return false;
+    }
+    
+    mLogger->Message("[School] accepting new pupil");
+    
     if (mPayLogic->MakeStartPayment(_pupil))
     {
         mPupils.emplace_back(_pupil);

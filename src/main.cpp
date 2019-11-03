@@ -13,12 +13,12 @@ int main(int argc, const char * argv[]) {
     std::cout << "Hello, World!\n";
     
 //    cSchool SchoolFree(std::shared_ptr<IPaySchoolLogic>(new cFreePaymentLogic));
-    cSchool SchoolFree(std::make_shared<cFreePaymentLogic>());
+    cSchool SchoolFree(std::make_shared<cFreePaymentLogic>(), std::make_shared<cFileLogger>());
     SchoolFree.AcceptNewPupil(cGeniusPupil::Create());
     SchoolFree.AcceptNewPupil(cCleverPupil::Create());
     SchoolFree.AcceptNewPupil(cForgetfulPupil::Create());
     
-    cSchool SchoolForGenius(std::make_shared<cGeniusFreeStudyPaymentLogic>());
+    cSchool SchoolForGenius(std::make_shared<cGeniusFreeStudyPaymentLogic>(), std::make_shared<cFileLogger>());
     SchoolForGenius.AcceptNewPupil(cGeniusPupil::Create());
     SchoolForGenius.AcceptNewPupil(cCleverPupil::Create());
     SchoolForGenius.AcceptNewPupil(cForgetfulPupil::Create());
