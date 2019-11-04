@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.11)
 
 project(TestMockStub)
 set (TEST_SOURCES SchoolTests.cpp PupilsTests.cpp PaymentLogicTests.cpp)
-set (LOGIC_SOURCES ../SchoolEntities.cpp)
+set (LOGIC_SOURCES ../SchoolEntities.cpp ../Notifier.cpp)
 set (CMAKE_CXX_STANDARD 11)
 
 add_executable(TestsMain.o main.cpp ${TEST_SOURCES} ${LOGIC_SOURCES})

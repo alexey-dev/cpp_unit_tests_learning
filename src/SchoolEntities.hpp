@@ -13,6 +13,7 @@
 #include <memory>
 #include <vector>
 #include "Logger.hpp"
+#include "Notifier.hpp"
 
 enum class eSchoolMark : uint8_t
 {
@@ -55,7 +56,7 @@ public:
 class cSchool
 {
 public:
-    cSchool(std::shared_ptr<IPaySchoolLogic>, std::shared_ptr<ILogger>);
+    cSchool(std::shared_ptr<IPaySchoolLogic>, std::shared_ptr<ILogger>, std::shared_ptr<INotifier>);
     
     bool AcceptNewPupil(std::shared_ptr<IPupil>);
     
@@ -66,6 +67,7 @@ public:
 private:
     std::shared_ptr<IPaySchoolLogic>     mPayLogic;
     std::shared_ptr<ILogger>             mLogger;
+    std::shared_ptr<INotifier>           mNotifier;
     std::vector<std::shared_ptr<IPupil>> mPupils;
 };
 

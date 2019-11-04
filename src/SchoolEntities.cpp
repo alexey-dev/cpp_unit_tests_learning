@@ -8,15 +8,16 @@
 
 #include "SchoolEntities.hpp"
 
-cSchool::cSchool(std::shared_ptr<IPaySchoolLogic> _payLogic, std::shared_ptr<ILogger> _logger) :
+cSchool::cSchool(std::shared_ptr<IPaySchoolLogic> _payLogic, std::shared_ptr<ILogger> _logger, std::shared_ptr<INotifier> _notifier) :
     mPayLogic(_payLogic),
-    mLogger(_logger)
+    mLogger(_logger),
+    mNotifier(_notifier)
 {}
     
 bool
 cSchool::AcceptNewPupil(std::shared_ptr<IPupil> _pupil)
 {
-    if (nullptr == mLogger)
+    if (nullptr == mLogger || mNotifier == nullptr)
     {
         return false;
     }
@@ -26,6 +27,7 @@ cSchool::AcceptNewPupil(std::shared_ptr<IPupil> _pupil)
     if (mPayLogic->MakeStartPayment(_pupil))
     {
         mPupils.emplace_back(_pupil);
+        mNotifier->Notify(eNotifyMsg::PUPIL_ACCEPTED);
         return true;
     }
     else

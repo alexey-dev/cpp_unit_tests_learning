@@ -8,7 +8,8 @@
 
 #include "Logger.hpp"
 
-void cFileLogger::Message(const std::string & _msg)
+void
+cFileLogger::Message(const std::string & _msg)
 {
 //TODO: finish later.
 }
